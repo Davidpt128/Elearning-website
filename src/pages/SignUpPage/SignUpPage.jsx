@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { http } from '../../ulti/setting';
 import { Button } from "antd";
 import { Validation } from "../../validation/Validation";
+import { history } from '../../App';
 
 
 let kiemTra = new Validation();
@@ -46,8 +47,11 @@ async function dangky(taiKhoan, matKhau, nhapLaiMatKhau, hoTen, soDT, email, maN
       body
     );
     console.log(result);
+    alert("Đăng kí thành công!");
+    history.push('/dangnhap')
   } catch (error) {
-    console.log(error);
+    alert(error.response.data);
+    console.log(error.response.data);
   }
 }
 
