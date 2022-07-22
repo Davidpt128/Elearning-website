@@ -1,0 +1,16 @@
+.login{
+    background-image: url(../../img/bussiness_img_1.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    .row{
+        min-height: 100vh;
+        input{
+            height: 40px;
+        }
+        button{
+            height: 40px;
+            padding: 0;
+        }
+    }
+}

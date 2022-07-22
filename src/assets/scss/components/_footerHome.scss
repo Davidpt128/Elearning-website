@@ -1,0 +1,11 @@
+.footer{
+    padding-top: 45px;
+    padding-bottom: 45px;
+    background-color: #1e1e2a;
+    color: white;
+    @include respond(phone) {
+        iframe{
+            display: none;
+        }
+    }
+}

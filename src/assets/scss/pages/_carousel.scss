@@ -1,0 +1,51 @@
+@import '../themes/theme1';
+
+
+
+.carousel{
+    background-image: url(../../img/bussiness_img_1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: white;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .carousel-main{
+        text-align: center;
+        padding: 100px;
+        h1{
+            font-size: 75px;
+            color: #ffcc00;
+        }
+        p{
+            font-size: 25px;
+            color: #cccccc;
+        }
+        @include respond(tablet) {
+            padding: 60px;
+            h1{
+                font-size: 50px;
+            }
+            p{
+                font-size: 20px;
+            }
+        }
+        @include respond(phone) {
+            padding: 30px;
+            h1{
+                font-size: 30px;
+            }
+            p{
+                font-size: 15px;
+            }
+        }
+    }
+    
+    
+}
+
+
+
