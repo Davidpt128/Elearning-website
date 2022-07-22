@@ -1,14 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { http } from '../../ulti/setting';
-import { Button } from "antd";
 
 async function list() {
   let result = await http.get('https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc');
   let dropDown = [];
   try {
     let data = result.data;
-    // console.log(data);
     for (let i = 0; i < 6; i++) {
       dropDown.push(data[i]);
     }

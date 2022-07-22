@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Route, Router, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import HomePage from "./pages/HomePage/HomePage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ListPage from "./pages/ListPage/ListPage";
 import HomeTemplate from "./templates/HomeTemplate";
@@ -23,7 +23,7 @@ function App() {
     <Router history={history}>
       <Switch>
         <HomeBeforeTemplate exact path="/dangnhap" component={LoginPage} />
-        <HomeBeforeTemplate exact path="/dangky" component={RegisterPage} />
+        <HomeBeforeTemplate exact path="/dangky" component={SignUpPage} />
         
         <HomeTemplate exact path="/home" component={HomePage} />
         <HomeTemplate exact path="/danhmuckhoahoc" component={ListPage} />
