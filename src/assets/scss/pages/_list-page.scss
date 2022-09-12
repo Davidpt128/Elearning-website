@@ -2,11 +2,12 @@
 
 
 .line {
-    background-image: linear-gradient(to left, #ffa07a, #ff0000, #8b0000);
+    background-image: linear-gradient(to left, #d6c879, #9b794a, #71540a);
     font-size: 30px;
-    padding: 25px;
+    padding: 20px;
     h1{
         // text-align: center;
+        margin-bottom: 0;
         font-size: 50px;
         @include respond(tablet) {
             font-size: 35px;
@@ -42,6 +43,7 @@
                 box-shadow: 1px 1px 10px rgb(221, 218, 218);
                 .thumbnail{
                     padding-bottom: 10px;
+                    min-height: 120px;
                     img{
                         width: 100%;
                         border-radius: 25px;
@@ -49,8 +51,13 @@
                 }
                 h1{
                     height: 45px;
-                    font-size: 15px;
-                }
+                    font-size: 13px;
+                    @include respond(tablet) {
+                        font-size: 17px;
+                    }
+                    @include respond(phone) {
+                        font-size: 22px;
+                    }                 }
                 .readmore{
                     button{
                         padding: 5px 20px;

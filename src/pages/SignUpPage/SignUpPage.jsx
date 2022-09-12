@@ -73,34 +73,34 @@ export default function RegisterPage(props) {
               <div className="card-body p-5">
                 <h2 className="text-uppercase text-center mb-5">Đăng ký</h2>
                 <form>
-                  <div className="form-outline mb-4">
+                  <div className="form-outline">
                     <input type="text" id="taiKhoan" className="form-control form-control-lg" placeholder='Tài khoản' onChange={(event) => setTaiKhoan(event.target.value)} />
-                    <p className="text-danger" id="error_required_taiKhoan"></p>
-                    <p className="text-danger" id="error_regex_taiKhoan"></p>
+                    <p className="text-danger error" id="error_required_taiKhoan"></p>
+                    <p className="text-danger error" id="error_regex_taiKhoan"></p>
                   </div>
-                  <div className="form-outline mb-4">
+                  <div className="form-outline">
                     <input type="password" id="matKhau" className="form-control form-control-lg" placeholder='Mật khẩu' onChange={(event) => setMatKhau(event.target.value)} />
-                    <p className="text-danger" id="error_required_matKhau"></p>
+                    <p className="text-danger error" id="error_required_matKhau"></p>
                   </div>
-                  <div className="form-outline mb-4">
+                  <div className="form-outline">
                     <input type="password" id="nhapLaiMatKhau" className="form-control form-control-lg" placeholder='Nhập lại mật khẩu' onChange={(event) => setNhapLaiMatKhau(event.target.value)} />
-                    <p className="text-danger" id="error_required_nhapLaiMatKhau"></p>
-                    <p className="text-danger" id="error_retype_nhapLaiMatKhau"></p>
+                    <p className="text-danger error" id="error_required_nhapLaiMatKhau error_retype_nhapLaiMatKhau"></p>
+                    <p className="text-danger error" id="error_retype_nhapLaiMatKhau"></p>
                   </div>
-                  <div className="form-outline mb-4">
+                  <div className="form-outline">
                     <input type="text" id="hoTen" className="form-control form-control-lg" placeholder='Họ tên' onChange={(event) => setHoTen(event.target.value)} />
-                    <p className="text-danger" id="error_required_hoTen"></p>
+                    <p className="text-danger error" id="error_required_hoTen"></p>
                   </div>
-                  <div className="form-outline mb-4">
+                  <div className="form-outline">
                     <input type="email" id="email" className="form-control form-control-lg" placeholder='Email' onChange={(event) => setEmail(event.target.value)} />
-                    <p className="text-danger" id="error_required_email"></p>
-                    <p className="text-danger" id="error_regex_email"></p>
+                    <p className="text-danger error" id="error_required_email error_regex_email"></p>
+                    <p className="text-danger error" id="error_regex_email"></p>
                   </div>
-                  <div className="form-outline mb-4">
+                  <div className="form-outline">
                     <input type="number" id="soDT" className="form-control form-control-lg" placeholder='Số điện thoại' onChange={(event) => setSoDT(event.target.value)} />
-                    <p className="text-danger" id="error_required_soDT"></p>
+                    <p className="text-danger error" id="error_required_soDT"></p>
                   </div>
-                  <div className="form-outline mb-4">
+                  <div className="form-outline">
                     <select className='form-control form-control-lg' id="maNhom" onChange={(event) => setMaNhom(event.target.value)}>
                       <option value="GP01">GP01</option>
                       <option value="GP02">GP02</option>

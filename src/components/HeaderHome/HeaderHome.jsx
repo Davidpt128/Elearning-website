@@ -7,22 +7,30 @@ import { http } from '../../ulti/setting';
 export default function HeaderHome(props) {
   const [dropdown,setDropdown] = useState([]);
 
+  const isLoggedIn = useSelector((rootReducers) => rootReducers.isLoggedInReducer.isLoggedIn);
+  
+  const user = useSelector((rootReducers) => rootReducers.infoUserReducer.data)
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const getCourse = async () => {
       try {
         const result = await http.get('/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc');
         // console.log('LayDanhMucKhoaHoc',result.data);
         setDropdown(result.data);
+        //Đưa danh mục khóa học lên redux
+        const action1 = {
+          type: 'GET_DANH_MUC_KHOA_HOC',
+          data: result.data
+        }
+        dispatch(action1)
       } catch (error) {
         console.log(error);
       }
     }
     getCourse();
   }, []);
-
-  const isLoggedIn = useSelector((rootReducers) => rootReducers.isLoggedInReducer.isLoggedIn);
-  const dispatch = useDispatch();
-  const user = useSelector((rootReducers) => rootReducers.infoUserReducer.data)
 
   return (
     <header className="header" id="header">
@@ -43,7 +51,7 @@ export default function HeaderHome(props) {
               </a>
               <div className="dropdown-menu">
                 {dropdown.map((item,index)=>{
-                  return <a className="dropdown-item" key={index} href="" >{item.tenDanhMuc}</a>
+                  return <NavLink className="dropdown-item" key={index} to={`/danhmuckhoahoc?maDanhMuc=${item.maDanhMuc}&MaNhom=GP01`} >{item.tenDanhMuc}</NavLink>
                 })}
               </div>
             </li>
@@ -65,10 +73,10 @@ export default function HeaderHome(props) {
                   <li className='navbar-user-item'>
                     <a href="/" onClick={() => {
                       localStorage.removeItem("data");
-                      const action = {
+                      const action2 = {
                         type: 'LOGOUT'
                       };
-                      dispatch(action);
+                      dispatch(action2);
                     }}>Đăng xuất</a>
                   </li>
                 </ul>

@@ -28,6 +28,10 @@
                         color: white;
                         display: inline-block;
                         padding: 5px auto;
+                        
+                    }
+                    .active{
+                        background-color:#1e1e2a;
                     }
                 }
                 &:hover {

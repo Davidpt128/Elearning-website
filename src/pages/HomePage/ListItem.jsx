@@ -4,19 +4,17 @@ import "../../assets/scss/pages/_home-page.scss";
 import { http } from '../../ulti/setting';
 // import axios from 'axios'; // no configuration
 import { Button } from "antd";
+import { useSelector } from "react-redux";
 
 export default function ListItem(props) {
-
   const [listCourse, setListCourse] = useState([]);
 
   useEffect(() => {
     const getCourse = async () => {
       try {
         const result = await http.get('/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc');
-        // console.log('danhSachKhoaHoc',result.data);
+        console.log('danhSachKhoaHoc', result.data);
         setListCourse(result.data);
-        // console.log('listCourse', listCourse);
-
       } catch (error) {
         console.log(error);
       }
@@ -27,14 +25,14 @@ export default function ListItem(props) {
   return (
     <section className="listItem" id="listItem">
       <div className="container">
-        <h1>Các khóa học mới nhất</h1>
+        <h1>Tất cả khóa học mới nhất</h1>
         <div className="list row">
           {listCourse.map((course, index) => {
             return <div className="col-12 col-sm-6 col-lg-3">
               <div key={index} className="item">
                 <div className="content">
                   <div className="thumbnail">
-                    <img src={course.hinhAnh} alt="" />
+                    <img className="img" src={course.hinhAnh} alt=''/>
                   </div>
                   <div>
                     <h1>{course.tenKhoaHoc}</h1>
