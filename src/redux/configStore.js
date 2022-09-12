@@ -1,7 +1,13 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import reduxThunk from 'redux-thunk';
-const rootReducers = combineReducers({
+import {isLoggedInReducer} from './reducers/isLoggedInReducer';
+import {infoUserReducer} from './reducers/infoUserReducer';
 
+
+const rootReducers = combineReducers({
+    //Các state sự án sẽ được khai báo tại đây
+    isLoggedInReducer,
+    infoUserReducer,
 
 });
 

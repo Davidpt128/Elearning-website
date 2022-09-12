@@ -4,15 +4,17 @@ import { http } from "../../ulti/setting";
 import { Button } from "antd";
 import { Validation } from "../../validation/Validation";
 import { history } from "../../App";
+import { useDispatch, useSelector } from "react-redux";
 
 let kiemTra = new Validation();
 
-async function dangNhap(taiKhoan, matKhau) {
+async function dangNhap(taiKhoan, matKhau, dispatch) {
   console.log(taiKhoan, matKhau);
   const body = {
     taiKhoan: taiKhoan,
     matKhau: matKhau,
   };
+  
 
   //Check validation
   let valid = true;
@@ -23,15 +25,32 @@ async function dangNhap(taiKhoan, matKhau) {
 
   try {
     const result = await http.post(
-      "https://elearningnew.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap",
+      "/api/QuanLyNguoiDung/DangNhap",
       body
     );
     document.querySelector('#error_check_matKhau').innerHTML = '';
     console.log(result.data);
-    console.log(result.data.maLoaiNguoiDung);
+    // console.log(result.data.maLoaiNguoiDung);
+
+    //lưu vô localStorage
     localStorage.setItem("data", JSON.stringify(result.data));
+
+    //dispatch lưu thông tin người dùng lên redux
+    const action1 = {
+      type: 'GET_INFO_USER',
+      data: result.data
+    }
+    dispatch(action1)
+
+    //dispatch thay đổi biến isLoggedIn
+    const action2 = {
+      type: "LOGIN",
+    }
+    dispatch(action2)
+
+    //chuyển hướng trang
     if(result.data.maLoaiNguoiDung === "HV") {
-      history.push('/home')
+      history.push('/')
     }
     else{
       history.push('/quanlykhoahoc')
@@ -45,6 +64,8 @@ async function dangNhap(taiKhoan, matKhau) {
 export default function LoginPage(props) {
   const [taiKhoan, setTaiKhoan] = useState("");
   const [matKhau, setMatKhau] = useState("");
+  const dispatch = useDispatch();
+
 
   return (
     <section className="login">
@@ -79,7 +100,7 @@ export default function LoginPage(props) {
                   <div className="d-flex justify-content-center">
                     <Button
                       type="button"
-                      onClick={() => dangNhap(taiKhoan, matKhau)}
+                      onClick={() => dangNhap(taiKhoan, matKhau, dispatch)}
                       className="custom-btn animation btn-block btn-lg gradient-custom-4 text-body"
                     >
                       Đăng nhập
@@ -101,13 +122,4 @@ export default function LoginPage(props) {
   );
 }
 
-/*
-onClick = {() => func1(data1, data2)} 
 
-func1
-
-func1(data1, data2);
-func1(data1, data2){
-  ...
-}
-*/

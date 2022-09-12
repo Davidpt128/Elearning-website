@@ -1,27 +1,29 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { http } from '../../ulti/setting';
 
-async function list() {
-  let result = await http.get('https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc');
-  let dropDown = [];
-  try {
-    let data = result.data;
-    for (let i = 0; i < 6; i++) {
-      dropDown.push(data[i]);
-    }
-  }
-  catch (err) {
-    console.log(err);
-  }
-
-  for (let data of dropDown) {
-    console.log(data);
-  }
-
-}
 
 export default function HeaderHome(props) {
+  const [dropdown,setDropdown] = useState([]);
+
+  useEffect(() => {
+    const getCourse = async () => {
+      try {
+        const result = await http.get('/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc');
+        // console.log('LayDanhMucKhoaHoc',result.data);
+        setDropdown(result.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getCourse();
+  }, []);
+
+  const isLoggedIn = useSelector((rootReducers) => rootReducers.isLoggedInReducer.isLoggedIn);
+  const dispatch = useDispatch();
+  const user = useSelector((rootReducers) => rootReducers.infoUserReducer.data)
+
   return (
     <header className="header" id="header">
       <div className="container">
@@ -36,16 +38,13 @@ export default function HeaderHome(props) {
               </NavLink>
             </li>
             <li className="navbar-item dropdown">
-              <a className="nav-link dropdown-toggle" onClick={list} id="navbardropdown">
+              <a className="nav-link dropdown-toggle" id="navbardropdown">
                 Danh mục khóa học
               </a>
               <div className="dropdown-menu">
-                <a className="dropdown-item" href="" onClick={list}>Lập trình Backend</a>
-                <a className="dropdown-item" href="" onClick={list}>Thiết kế Web</a>
-                <a className="dropdown-item" href="" onClick={list}>Lập trình di động</a>
-                <a className="dropdown-item" href="" onClick={list}>Lập trình Frontend</a>
-                <a className="dropdown-item" href="" onClick={list}>Lập trình Full Stack</a>
-                <a className="dropdown-item" href="" onClick={list}>Tư duy lập trình</a>
+                {dropdown.map((item,index)=>{
+                  return <a className="dropdown-item" key={index} href="" >{item.tenDanhMuc}</a>
+                })}
               </div>
             </li>
           </ul>
@@ -54,20 +53,32 @@ export default function HeaderHome(props) {
               <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
-            {/* <NavLink className="navbar-item font-weight-bolder" to="/dangky">Đăng ký</NavLink> */}
-            {/* <NavLink className="navbar-item font-weight-bolder" to="/dangnhap" >Đăng nhập</NavLink> */}
-            <div className='navbar-item navbar-user dropdown-toggle'>
-              <img src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg" alt="" />
-              <span>Nguyễn Văn A</span>
-              <ul className='navbar-user-menu'>
-                <li className='navbar-user-item'>
-                  <NavLink to="/thongtinnguoidung">Cập nhật thông tin</NavLink>
-                </li>
-                <li className='navbar-user-item'>
-                  <a href="/" onClick={()=>{localStorage.removeItem("data")}}>Đăng xuất</a>
-                </li>
-              </ul>
-            </div>
+
+            {isLoggedIn ? <>
+              <div className='navbar-item navbar-user dropdown-toggle'>
+                <img src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg" alt="" />
+                <span>{user.hoTen}</span>
+                <ul className='navbar-user-menu'>
+                  <li className='navbar-user-item'>
+                    <NavLink to="/thongtinnguoidung">Cập nhật thông tin</NavLink>
+                  </li>
+                  <li className='navbar-user-item'>
+                    <a href="/" onClick={() => {
+                      localStorage.removeItem("data");
+                      const action = {
+                        type: 'LOGOUT'
+                      };
+                      dispatch(action);
+                    }}>Đăng xuất</a>
+                  </li>
+                </ul>
+              </div>
+            </>
+              : <>
+                <NavLink className="navbar-item font-weight-bolder" to="/dangky">Đăng ký</NavLink>
+                <NavLink className="navbar-item font-weight-bolder" to="/dangnhap" >Đăng nhập</NavLink>
+              </>
+            }
           </ul>
         </nav>
       </div>
