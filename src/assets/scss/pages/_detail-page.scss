@@ -1,0 +1,29 @@
+.detail{
+    min-height: 100vh;
+    .banner{
+        background-image: url(../../img/bussiness_img_1.jpg);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size:cover;
+        text-align: center;
+        padding: 40px 0;
+        h1{
+            color: #ffffff;
+        }
+        button{
+            background: none;
+            color: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #ffffff;
+            padding: 10px 30px;
+        }
+        img{
+            @include respond (tablet){
+                display: none;
+            }
+        }
+    }
+    .introduction{
+        padding: 40px 70px;
+    }
+}

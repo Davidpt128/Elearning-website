@@ -1,40 +1,29 @@
 import React from 'react'
-import { http } from '../../ulti/setting';
 import { Button } from "antd";
-import { NavLink } from "react-router-dom";
-
-async function dangky1(){
-  let code = http.get('https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01')
-  let result = http.get('https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=LTC_GP01');
-  let infor = [];
-  try {
-    let data = result.data;
-    // console.log(data);
-    for(let i = code.length; i < code.length; i++){
-      infor.push(data[i]);
-    }
-  }
-  catch(err){
-    console.log(err);
-  }
-
-  for(let data of infor){
-    console.log(data);
-  }
-
-}
+import { NavLink } from 'react-router-dom';
 
 
 export default function DetailPage(props) {
+
   return (
-    <div className="col-3">
-            <div className="item">
-              <div className="content">
-                <i className="fab fa-autoprefixer" />
-                <h1>Thành thạo Bootstrap qua 10 website</h1>
-                <Button className="btn btn-warning" onClick={dangky1}>Đăng ký</Button>
-              </div>
+    <div className="detail">
+      <div className="container">
+        <div className="banner">
+          <div className='row'>
+            <div className='col-12 col-lg-7'>
+              <h1>LẬP TRÌNH FRONT END</h1>
+              <button>Đăng ký</button>
+            </div>
+            <div className="col-0 col-lg-5">
+              <img src="https://elearning0706.cybersoft.edu.vn/hinhanh/cong-nghe-phan-mem_gp01.png" />
             </div>
           </div>
+        </div>
+        <div className='introduction'>
+          <h2>Giới thiệu khóa học</h2>
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error incidunt recusandae ea perspiciatis enim beatae placeat, eius id. Eius doloremque reprehenderit possimus tenetur nobis sequi consequatur corporis illum eligendi vero explicabo voluptatibus quia nemo neque veritatis temporibus rem natus, dicta minima assumenda expedita. Impedit, consequatur ipsa maxime voluptas sint alias?</p>
+        </div>
+      </div>
+    </div>
   )
 }

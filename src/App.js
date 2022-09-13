@@ -23,11 +23,12 @@ function App() {
       <Switch>
         <HomeTemplate exact path="/dangnhap" component={LoginPage} />
         <HomeTemplate exact path="/dangky" component={SignUpPage} />
-        
         <HomeTemplate exact path="/home" component={HomePage} />
         <HomeTemplate exact path="/danhmuckhoahoc" component={ListPage} />
         <HomeTemplate exact path="/thongtinnguoidung" component={Info} />
-        <HomeTemplate exact path="/demo" component={Demo} />
+        <HomeTemplate exact path="/chitiet" component={DetailPage} />
+
+        {/* <HomeTemplate exact path="/demo" component={Demo} /> */}
 
         <AdminTemplate exact path="/quanlynguoidung" component={UserPage} />
         <AdminTemplate exact path="/quanlykhoahoc" component={ClassPage} />

@@ -100,7 +100,7 @@ export default function RegisterPage(props) {
                     <input type="number" id="soDT" className="form-control form-control-lg" placeholder='Số điện thoại' onChange={(event) => setSoDT(event.target.value)} />
                     <p className="text-danger error" id="error_required_soDT"></p>
                   </div>
-                  <div className="form-outline">
+                  <div className="form-outline mb-4">
                     <select className='form-control form-control-lg' id="maNhom" onChange={(event) => setMaNhom(event.target.value)}>
                       <option value="GP01">GP01</option>
                       <option value="GP02">GP02</option>

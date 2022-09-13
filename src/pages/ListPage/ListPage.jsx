@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function ListPage(props) {
   const [listCourse, setListCourse] = useState([]);
-  let maDanhMuc = props.location.search.slice(11).slice(null,-12)
+  let maDanhMuc = props.location.search.slice(11)
   let listDanhMuc = useSelector((rootReducers) => rootReducers.listOfCoursesReducer)
   let danhMuc = listDanhMuc.find(danhMuc => danhMuc.maDanhMuc === maDanhMuc)
   // console.log('tendanhmuc',tenDanhMuc)

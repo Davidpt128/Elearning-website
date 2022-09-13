@@ -51,7 +51,7 @@ export default function HeaderHome(props) {
               </a>
               <div className="dropdown-menu">
                 {dropdown.map((item,index)=>{
-                  return <NavLink className="dropdown-item" key={index} to={`/danhmuckhoahoc?maDanhMuc=${item.maDanhMuc}&MaNhom=GP01`} >{item.tenDanhMuc}</NavLink>
+                  return <NavLink className="dropdown-item" key={index} to={`/danhmuckhoahoc?maDanhMuc=${item.maDanhMuc}`} >{item.tenDanhMuc}</NavLink>
                 })}
               </div>
             </li>
