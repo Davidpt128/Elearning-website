@@ -1,10 +1,19 @@
+import userEvent from '@testing-library/user-event'
 import { Button } from 'antd/lib/radio'
 import React from 'react'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
-// useEffect()
+
 
 export default function Info() {
+  let user = useSelector((rootReducers) => rootReducers.infoUserReducer)
+
+
+  useEffect(()=>{
+    
+  },[])
+
   return (
     <section className='info'>
       <div className='container'>
@@ -26,7 +35,7 @@ export default function Info() {
                     <h6 className="mb-0">Email</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
-                    abcd@gmail.com
+                    {user.data.email}
                   </div>
                 </div>
                 <hr />
@@ -35,7 +44,7 @@ export default function Info() {
                     <h6 className="mb-0">Họ Tên</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
-                    Nguyễn Văn A
+                    {user.data.hoTen}
                   </div>
                 </div>
                 <hr />
@@ -44,7 +53,7 @@ export default function Info() {
                     <h6 className="mb-0">Số điện thoại</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
-                    2398169029
+                    {user.data.soDT}
                   </div>
                 </div>
                 <hr />
@@ -53,7 +62,7 @@ export default function Info() {
                     <h6 className="mb-0">Tài khoản</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
-                    nguyenvana
+                    {user.data.taiKhoan}
                   </div>
                 </div>
                 <hr />
@@ -62,7 +71,7 @@ export default function Info() {
                     <h6 className="mb-0">Mật khẩu</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
-                    123456789
+                    <p>*********</p>
                   </div>
                 </div>
                 <hr />

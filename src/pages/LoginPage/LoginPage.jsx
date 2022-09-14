@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { http } from "../../ulti/setting";
+import { ACCESSTOKEN, http } from "../../ulti/setting";
 import { Button } from "antd";
 import { Validation } from "../../validation/Validation";
 import { history } from "../../App";
@@ -34,6 +34,7 @@ async function dangNhap(taiKhoan, matKhau, dispatch) {
 
     //lưu vô localStorage
     localStorage.setItem("data", JSON.stringify(result.data));
+    localStorage.setItem(ACCESSTOKEN, JSON.stringify(result.data.accessToken))
 
     //dispatch lưu thông tin người dùng lên redux
     const action1 = {

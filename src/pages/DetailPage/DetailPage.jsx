@@ -9,24 +9,27 @@ import { history } from '../../App';
 export default function DetailPage(props) {
   let postId = props.match.params.postid
   // console.log('postid',postId)
-  
+
   let listCourse = useSelector((rootReducers) => rootReducers.listCourseReducer)
   let user = useSelector((rootReducers) => rootReducers.infoUserReducer)
   let course = listCourse.find(course => course.maKhoaHoc === postId)
-  // console.log('course',course)
-  
-  async function registerCourse(course) {
+  console.log('user', user)
+
+  function registerCourse() {
+
+    const body = {
+      maKhoaHoc: course.maKhoaHoc,
+      taiKhoan: user.data.taiKhoan,
+    }
     const postCourse = async () => {
       try {
         const result = await http.post('/api/QuanLyKhoaHoc/DangKyKhoaHoc',
-          { maKhoaHoc: course.maKhoaHoc,
-            taiKhoan: user.data.taiKhoan
-          });
-        console.log('result',result.data)
+          body);
+        console.log('result', result.data)
         alert(result.data)
         history.push('/')
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error);
         alert(error.response.data)
         history.push('/')
       }
@@ -41,7 +44,7 @@ export default function DetailPage(props) {
           <div className='row'>
             <div className='col-12 col-lg-7'>
               <h1>{course.tenKhoaHoc}</h1>
-              <button onClick={() => {registerCourse(course,user)}}>Đăng ký</button>
+              <button onClick={() => { registerCourse(course, user) }}>Đăng ký</button>
             </div>
             <div className="col-0 col-lg-5">
               <img src={course.hinhAnh} />
