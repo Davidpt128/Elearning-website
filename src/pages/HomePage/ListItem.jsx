@@ -14,7 +14,7 @@ export default function ListItem(props) {
     const getCourse = async () => {
       try {
         const result = await http.get('/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc');
-        console.log('danhSachKhoaHoc', result.data);
+        // console.log('danhSachKhoaHoc', result.data);
         setListCourse(result.data);
 
         const action = {

@@ -8,9 +8,7 @@ export default function ListPage(props) {
   let maDanhMuc = props.location.search.slice(11)
   let listDanhMuc = useSelector((rootReducers) => rootReducers.catalogReducer)
   let danhMuc = listDanhMuc.find(danhMuc => danhMuc.maDanhMuc === maDanhMuc)
-  // console.log('tendanhmuc',tenDanhMuc)
-  // console.log('maDanhMuc',maDanhMuc)
-  console.log('danhMuc',danhMuc.tenDanhMuc)
+  
 
 
   useEffect(() => {

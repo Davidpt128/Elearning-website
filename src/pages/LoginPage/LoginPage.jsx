@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 let kiemTra = new Validation();
 
 async function dangNhap(taiKhoan, matKhau, dispatch) {
-  console.log(taiKhoan, matKhau);
+  // console.log(taiKhoan, matKhau);
   const body = {
     taiKhoan: taiKhoan,
     matKhau: matKhau,
@@ -29,7 +29,7 @@ async function dangNhap(taiKhoan, matKhau, dispatch) {
       body
     );
     document.querySelector('#error_check_matKhau').innerHTML = '';
-    console.log(result.data);
+    // console.log(result.data);
     // console.log(result.data.maLoaiNguoiDung);
 
     //lưu vô localStorage
