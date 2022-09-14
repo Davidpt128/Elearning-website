@@ -26,7 +26,7 @@ function App() {
         <HomeTemplate exact path="/home" component={HomePage} />
         <HomeTemplate exact path="/danhmuckhoahoc" component={ListPage} />
         <HomeTemplate exact path="/thongtinnguoidung" component={Info} />
-        <HomeTemplate exact path="/chitiet" component={DetailPage} />
+        <HomeTemplate exact path="/chitiet/:postid" component={DetailPage} />
 
         {/* <HomeTemplate exact path="/demo" component={Demo} /> */}
 

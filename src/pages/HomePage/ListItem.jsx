@@ -4,10 +4,11 @@ import "../../assets/scss/pages/_home-page.scss";
 import { http } from '../../ulti/setting';
 // import axios from 'axios'; // no configuration
 import { Button } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ListItem(props) {
   const [listCourse, setListCourse] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getCourse = async () => {
@@ -15,6 +16,12 @@ export default function ListItem(props) {
         const result = await http.get('/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc');
         console.log('danhSachKhoaHoc', result.data);
         setListCourse(result.data);
+
+        const action = {
+          type: 'GET_KHOA_HOC',
+          data: result.data
+        }
+        dispatch(action);
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +44,7 @@ export default function ListItem(props) {
                   <div>
                     <h1>{course.tenKhoaHoc}</h1>
                     <div className="readmore">
-                      <button className="custom-btn animation">Đăng ký</button>
+                      <NavLink className="custom-btn animation" to={`chitiet/${course.maKhoaHoc}`}>Đăng ký</NavLink>
                     </div>
                   </div>
                 </div>

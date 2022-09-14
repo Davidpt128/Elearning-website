@@ -7,6 +7,7 @@
         background-size:cover;
         text-align: center;
         padding: 40px 0;
+        min-height: 40vh;
         h1{
             color: #ffffff;
         }
@@ -16,14 +17,22 @@
             border-radius: 20px;
             border: 1px solid #ffffff;
             padding: 10px 30px;
+            &:hover{
+                color: #ffc107;
+                border: 1px solid #ffc107;
+            }
         }
         img{
+            height: 200px;
+            border-radius: 15px;
             @include respond (tablet){
                 display: none;
             }
         }
     }
     .introduction{
-        padding: 40px 70px;
+        .container{
+            padding: 40px 70px;
+        }
     }
 }

@@ -1,27 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button } from "antd";
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 export default function DetailPage(props) {
+  let postId = props.match.params.postid
+  // console.log('postid',postId)
+  
+  let listCourse = useSelector((rootReducers) => rootReducers.listCourseReducer)
+  let course = listCourse.find(course => course.maKhoaHoc === postId)
+  // console.log('course',course)
+  
 
   return (
     <div className="detail">
-      <div className="container">
-        <div className="banner">
+      <div className="banner">
+        <div className="container">
           <div className='row'>
             <div className='col-12 col-lg-7'>
-              <h1>LẬP TRÌNH FRONT END</h1>
+              <h1>{course.tenKhoaHoc}</h1>
               <button>Đăng ký</button>
             </div>
             <div className="col-0 col-lg-5">
-              <img src="https://elearning0706.cybersoft.edu.vn/hinhanh/cong-nghe-phan-mem_gp01.png" />
+              <img src={course.hinhAnh} />
             </div>
           </div>
         </div>
-        <div className='introduction'>
+      </div>
+      <div className='introduction'>
+        <div className="container">
           <h2>Giới thiệu khóa học</h2>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error incidunt recusandae ea perspiciatis enim beatae placeat, eius id. Eius doloremque reprehenderit possimus tenetur nobis sequi consequatur corporis illum eligendi vero explicabo voluptatibus quia nemo neque veritatis temporibus rem natus, dicta minima assumenda expedita. Impedit, consequatur ipsa maxime voluptas sint alias?</p>
+          <p>{course.moTa}</p>
         </div>
       </div>
     </div>
