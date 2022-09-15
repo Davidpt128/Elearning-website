@@ -2,6 +2,7 @@ import "../../assets/scss/pages/_list-page.scss";
 import React, { useState, useEffect } from "react";
 import { http } from "../../ulti/setting"
 import { useSelector } from "react-redux";
+import Item from "../../components/Item/Item";
 
 export default function ListPage(props) {
   const [listCourse, setListCourse] = useState([]);
@@ -39,19 +40,7 @@ export default function ListPage(props) {
           <div className="list row">
             {listCourse.map((course, index) => {
               return <div className="col-12 col-sm-6 col-lg-3">
-                <div key={index} className="item">
-                  <div className="content">
-                    <div className="thumbnail">
-                      <img src={course.hinhAnh} alt="" />
-                    </div>
-                    <div>
-                      <h1>{course.tenKhoaHoc}</h1>
-                      <div className="readmore">
-                        <button className="custom-btn animation">Đăng ký</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <Item course={course} index={index} button={'Đăng'}></Item>
               </div>
             })}
           </div>

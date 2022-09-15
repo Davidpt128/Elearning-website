@@ -1,18 +1,53 @@
 import userEvent from '@testing-library/user-event'
 import { Button } from 'antd/lib/radio'
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { http } from '../../ulti/setting'
+import Item from '../../components/Item/Item'
 
 
 
 export default function Info() {
+  const [listCourse, setListCourse] = useState([]);
   let user = useSelector((rootReducers) => rootReducers.infoUserReducer)
 
 
-  useEffect(()=>{
-    
+  useEffect(() => {
+    const getCourse = async () => {
+      try {
+        const result = await http.post(`/api/QuanLyNguoiDung/ThongTinNguoiDung`, { taiKhoan: user.data.taiKhoan });
+        console.log('LayKhoaHocTheoDanhMuc', result.data);
+
+        setListCourse(result.data.chiTietKhoaHocGhiDanh);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getCourse();
   },[])
+  
+
+  let araesCourse = async (maKhoaHoc) => {
+    try {
+      const result = await http.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`, {  maKhoaHoc: maKhoaHoc,taiKhoan: user.data.taiKhoan});
+      console.log('HuyKhoaHoc', result.data);
+      alert(result.data)
+      const getCourse = async () => {
+        try {
+          const result = await http.post(`/api/QuanLyNguoiDung/ThongTinNguoiDung`, { taiKhoan: user.data.taiKhoan });
+          console.log('LayKhoaHocTheoDanhMuc', result.data);
+  
+          setListCourse(result.data.chiTietKhoaHocGhiDanh);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      getCourse();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <section className='info'>
@@ -91,62 +126,11 @@ export default function Info() {
             </div>
 
             <div className="list row">
-              <div className="item col-12 col-sm-6 col-lg-3">
-                <div className="content">
-                  <div className="thumbnail">
-                    <img src="https://elearningnew.cybersoft.edu.vn/hinhanh/342t354y_gp01.png" alt="" />
-                  </div>
-                  <div>
-                    <h1>Thành thạo Bootstrap qua 10 website</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, voluptatem error.</p>
-                    <div className="readmore">
-                      <button className="custom-btn animation">Hủy</button>
-                    </div>
-                  </div>
+              {listCourse.map((course, index) => {
+                return <div className="col-12 col-sm-6 col-lg-3">
+                  <Item course={course} index={index} button={'Hủy'} functionButton={araesCourse}></Item>
                 </div>
-              </div>
-              <div className="item col-12 col-sm-6 col-lg-3">
-                <div className="content">
-                  <div className="thumbnail">
-                    <img src="https://elearningnew.cybersoft.edu.vn/hinhanh/342t354y_gp01.png" alt="" />
-                  </div>
-                  <div>
-                    <h1>Thành thạo Bootstrap qua 10 website</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, voluptatem error.</p>
-                    <div className="readmore">
-                      <button className="custom-btn animation">Hủy</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-12 col-sm-6 col-lg-3">
-                <div className="content">
-                  <div className="thumbnail">
-                    <img src="https://elearningnew.cybersoft.edu.vn/hinhanh/342t354y_gp01.png" alt="" />
-                  </div>
-                  <div>
-                    <h1>Thành thạo Bootstrap qua 10 website</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, voluptatem error.</p>
-                    <div className="readmore">
-                      <button className="custom-btn animation">Hủy</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="item col-12 col-sm-6 col-lg-3">
-                <div className="content">
-                  <div className="thumbnail">
-                    <img src="https://elearningnew.cybersoft.edu.vn/hinhanh/342t354y_gp01.png" alt="" />
-                  </div>
-                  <div>
-                    <h1>Thành thạo Bootstrap qua 10 website</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, voluptatem error.</p>
-                    <div className="readmore">
-                      <button className="custom-btn animation">Hủy</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              })}
             </div>
           </div>
         </div>
