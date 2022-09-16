@@ -49,7 +49,7 @@ export default function ListPage(props) {
                     <div>
                       <h1>{course.tenKhoaHoc}</h1>
                       <div className="readmore">
-                        <NavLink className="custom-btn animation" to={`chitiet/${course.maKhoaHoc}`}>Đăng ký</NavLink>
+                        <NavLink className="custom-btn animation" to={`chitiet/${course.maKhoaHoc}`}>Chi tiết</NavLink>
                       </div>
                     </div>
                   </div>

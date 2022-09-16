@@ -27,7 +27,7 @@ export default function DetailPage(props) {
           body);
         console.log('result', result.data)
         alert(result.data)
-        history.push('/')
+        history.goBack()
       } catch (error) {
         console.log(error);
         alert(error.response.data)
