@@ -31,7 +31,7 @@ export default function DetailPage(props) {
       } catch (error) {
         console.log(error);
         alert(error.response.data)
-        history.push('/')
+        history.goBack()
       }
     }
     postCourse();

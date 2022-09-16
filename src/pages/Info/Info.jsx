@@ -112,7 +112,7 @@ export default function Info() {
                 <hr />
                 <div className="row">
                   <div className="col-sm-12">
-                    <a className="btn btn-warning " href="#">Thay đổi thông tin</a>
+                    <button className="btn btn-warning " href="#">Thay đổi thông tin</button>
                   </div>
                 </div>
               </div>
@@ -120,11 +120,9 @@ export default function Info() {
           </div>
           {/* KHÓA HỌC CỦA TÔI */}
           <div className="courses tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
-            <div className='content row'>
-              <h2 className='col-12 col-lg-9'>CÁC KHÓA HỌC ĐÃ THAM GIA</h2>
-              <input className='col-12 col-lg-3 form-control' type="text" placeholder='Nhập khóa học cần tìm' />
+            <div className='content'>
+              <h2>CÁC KHÓA HỌC ĐÃ ĐĂNG KÝ</h2>
             </div>
-
             <div className="list row">
               {listCourse.map((course, index) => {
                 return <div className="col-12 col-sm-6 col-lg-3">

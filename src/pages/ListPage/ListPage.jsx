@@ -42,7 +42,7 @@ export default function ListPage(props) {
             {listCourse.map((course, index) => {
               return <div className="col-12 col-sm-6 col-lg-3">
                 <div key={index} className="item">
-                  <div className="content">
+                  <div className="item__content">
                     <div className="thumbnail">
                       <img className="img" src={course.hinhAnh} alt='' />
                     </div>

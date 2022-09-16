@@ -8,7 +8,13 @@
         box-shadow: 1px 1px 10px rgb(221, 218, 218);
         .thumbnail{
             padding-bottom: 10px;
-            min-height: 120px;
+            height: 140px;
+            @include respond(tablet) {
+                height: 240px;
+            }
+            @include respond(phone) {
+                height: 280px;
+            } 
             img{
                 width: 100%;
                 border-radius: 25px;
@@ -18,9 +24,11 @@
             height: 60px;
             font-size: 13px;
             @include respond(tablet) {
+                height: 35px;
                 font-size: 17px;
             }
             @include respond(phone) {
+                height: 40px;
                 font-size: 22px;
             } 
         }
