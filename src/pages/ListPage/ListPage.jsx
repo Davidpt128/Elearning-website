@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import { http } from "../../ulti/setting"
 import { useSelector } from "react-redux";
 import Item from "../../components/Item/Item";
+import { NavLink } from "react-router-dom";
 
 export default function ListPage(props) {
   const [listCourse, setListCourse] = useState([]);
   let maDanhMuc = props.location.search.slice(11)
   let listDanhMuc = useSelector((rootReducers) => rootReducers.catalogReducer)
   let danhMuc = listDanhMuc.find(danhMuc => danhMuc.maDanhMuc === maDanhMuc)
-  
+
 
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function ListPage(props) {
   }, [props.location.search]);
 
   return (
-    <div style={{minHeight:'100vh'}}>
+    <div style={{ minHeight: '100vh' }}>
       <div className='line'>
         <div className="container">
           <h1>{danhMuc.tenDanhMuc}</h1>
@@ -40,7 +41,19 @@ export default function ListPage(props) {
           <div className="list row">
             {listCourse.map((course, index) => {
               return <div className="col-12 col-sm-6 col-lg-3">
-                <Item course={course} index={index} button={'Đăng'}></Item>
+                <div key={index} className="item">
+                  <div className="content">
+                    <div className="thumbnail">
+                      <img className="img" src={course.hinhAnh} alt='' />
+                    </div>
+                    <div>
+                      <h1>{course.tenKhoaHoc}</h1>
+                      <div className="readmore">
+                        <NavLink className="custom-btn animation" to={`chitiet/${course.maKhoaHoc}`}>Đăng ký</NavLink>
+                      </div>
+                    </div>
+                  </div>
+                </div>              
               </div>
             })}
           </div>
