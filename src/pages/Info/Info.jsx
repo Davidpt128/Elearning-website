@@ -25,19 +25,19 @@ export default function Info() {
       }
     }
     getCourse();
-  },[])
-  
+  }, [])
+
 
   let araesCourse = async (maKhoaHoc) => {
     try {
-      const result = await http.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`, {  maKhoaHoc: maKhoaHoc,taiKhoan: user.data.taiKhoan});
+      const result = await http.post(`/api/QuanLyKhoaHoc/HuyGhiDanh`, { maKhoaHoc: maKhoaHoc, taiKhoan: user.data.taiKhoan });
       console.log('HuyKhoaHoc', result.data);
       alert(result.data)
       const getCourse = async () => {
         try {
           const result = await http.post(`/api/QuanLyNguoiDung/ThongTinNguoiDung`, { taiKhoan: user.data.taiKhoan });
           console.log('LayKhoaHocTheoDanhMuc', result.data);
-  
+
           setListCourse(result.data.chiTietKhoaHocGhiDanh);
         } catch (error) {
           console.log(error);
@@ -67,6 +67,15 @@ export default function Info() {
               <div className="card-body">
                 <div className="row">
                   <div className="col-sm-3">
+                    <h6 className="mb-0">Tài khoản</h6>
+                  </div>
+                  <div className="col-sm-9 text-secondary">
+                    {user.data.taiKhoan}
+                  </div>
+                </div>
+                <hr />
+                <div className="row">
+                  <div className="col-sm-3">
                     <h6 className="mb-0">Email</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
@@ -94,15 +103,6 @@ export default function Info() {
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <h6 className="mb-0">Tài khoản</h6>
-                  </div>
-                  <div className="col-sm-9 text-secondary">
-                    {user.data.taiKhoan}
-                  </div>
-                </div>
-                <hr />
-                <div className="row">
-                  <div className="col-sm-3">
                     <h6 className="mb-0">Mật khẩu</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
@@ -112,7 +112,7 @@ export default function Info() {
                 <hr />
                 <div className="row">
                   <div className="col-sm-12">
-                    <button className="btn btn-warning " href="#">Thay đổi thông tin</button>
+                    <button className="btn btn-warning" data-toggle="modal" data-target="#modelId">Thay đổi thông tin</button>
                   </div>
                 </div>
               </div>
@@ -129,6 +129,69 @@ export default function Info() {
                   <Item course={course} index={index} button={'Hủy'} functionButton={araesCourse}></Item>
                 </div>
               })}
+            </div>
+          </div>
+        </div>
+        {/* Button */}
+        <div>
+          <div className="modal fade" id="modelId" tabIndex={-1} role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Thay đổi thông tin</h5>
+                  <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  {/* <div className="card mb-3"> */}
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-sm-4">
+                        <h6 className="mb-0">Tài khoản</h6>
+                      </div>
+                      <div className="col-sm-8 text-secondary">
+                        {user.data.taiKhoan}
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-4">
+                        <h6 className="mb-0">Email</h6>
+                      </div>
+                      <div className="col-sm-8 text-secondary">
+                        {user.data.email}
+                      </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-4">
+                        <h6 className="mb-0">Họ Tên</h6>
+                      </div>
+                      <input className='col-sm-8' type="text" />
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-4">
+                        <h6 className="mb-0">Số điện thoại</h6>
+                      </div>
+                      <input className='col-sm-8' type="text" />
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-4">
+                        <h6 className="mb-0">Mật khẩu</h6>
+                      </div>
+                      <input className='col-sm-8' type="text" />
+                    </div>
+                  </div>
+                  {/* </div> */}
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                  <button type="button" className="btn btn-primary">Lưu</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
