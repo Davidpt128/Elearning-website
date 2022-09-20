@@ -76,29 +76,29 @@ export default function LoginPage(props) {
             <div className="card" style={{ borderRadius: 15 }}>
               <div className="card-body p-5">
                 <h2 className="text-uppercase text-center mb-5">Đăng nhập</h2>
-                <form>
-                  <div className="form-outline mb-4">
+                <form className="form-outline">
+                  {/* <div className="form-outline mb-4"> */}
                     <input
                       type="text"
                       id="taiKhoan"
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg mb-4"
                       placeholder="Tài khoản"
                       onChange={(event) => setTaiKhoan(event.target.value)}
                     />
                     <p className="text-danger" id="error_required_taiKhoan"></p>
-                  </div>
-                  <div className="form-outline mb-4">
+                  {/* </div> */}
+                  {/* <div className="form-outline mb-4"> */}
                     <input
                       type="password"
                       id="matKhau"
-                      className="form-control form-control-lg"
+                      className="form-control form-control-lg mb-4"
                       placeholder="Mật khẩu"
                       onChange={(event) => setMatKhau(event.target.value)}
                     />
                     <p className="text-danger" id="error_required_matKhau"></p>
                     <p className="text-danger" id="error_check_matKhau"></p>
-                  </div>
-                  <div className="d-flex justify-content-center">
+                  {/* </div> */}
+                  {/* <div className="d-flex justify-content-center"> */}
                     <Button
                       type="button"
                       onClick={() => dangNhap(taiKhoan, matKhau, dispatch)}
@@ -106,7 +106,7 @@ export default function LoginPage(props) {
                     >
                       Đăng nhập
                     </Button>
-                  </div>
+                  {/* </div> */}
                   <p className="text-center text-muted mt-5 mb-0">
                     Bạn chưa có tài khoản?{" "}
                     <NavLink to="/dangky" className="fw-bold text-body">
