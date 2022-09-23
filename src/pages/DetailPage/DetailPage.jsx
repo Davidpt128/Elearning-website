@@ -19,7 +19,7 @@ export default function DetailPage(props) {
 
     const body = {
       maKhoaHoc: course.maKhoaHoc,
-      taiKhoan: user.data.taiKhoan,
+      taiKhoan: user.taiKhoan,
     }
     const postCourse = async () => {
       try {
