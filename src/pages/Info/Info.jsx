@@ -2,21 +2,33 @@ import userEvent from '@testing-library/user-event'
 import { Button } from 'antd/lib/radio'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { http } from '../../ulti/setting'
 import Item from '../../components/Item/Item'
+import { Validation } from '../../validation/Validation'
+import { history } from '../../App'
 
+let kiemTra = new Validation();
 
 
 export default function Info() {
   const [listCourse, setListCourse] = useState([]);
+  // const [user, setUser] = useState(useSelector((rootReducers) => rootReducers.infoUserReducer));
   let user = useSelector((rootReducers) => rootReducers.infoUserReducer)
+  console.log('user',user)
+
+  const [hoTen, setHoTen] = useState(user.hoTen)
+  const [soDT, setSoDT] = useState(user.soDT)
+  const [matKhau, setMatKhau] = useState('')
+  const [nhapLaiMatKhau, setNhapLaiMatKhau] = useState("");
+
+  const dispatch = useDispatch();
 
 
   useEffect(() => {
     const getCourse = async () => {
       try {
-        const result = await http.post(`/api/QuanLyNguoiDung/ThongTinNguoiDung`, { taiKhoan: user.data.taiKhoan });
+        const result = await http.post(`/api/QuanLyNguoiDung/ThongTinNguoiDung`, { taiKhoan: user.taiKhoan });
         console.log('LayKhoaHocTheoDanhMuc', result.data);
 
         setListCourse(result.data.chiTietKhoaHocGhiDanh);
@@ -49,6 +61,43 @@ export default function Info() {
     }
   }
 
+
+  async function capNhatThongTin(hoTen, soDT, matKhau, nhapLaiMatKhau) {
+    const body = {
+      taiKhoan: user.taiKhoan,
+      matKhau: matKhau,
+      hoTen: hoTen,
+      soDT: soDT,
+      maLoaiNguoiDung: user.maLoaiNguoiDung,
+      maNhom: user.maNhom,
+      email: user.email
+    }
+
+    try {
+      const result = await http.put(
+        "/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+        body
+      );
+      console.log('result',result.data)
+      alert('Cập nhật thành công')
+      
+      //dispatch
+      const action ={
+        type: 'CAP_NHAP_THONG_TIN',
+        data: result.data
+      }
+      dispatch(action)
+
+      // // setUser
+      // user.hoTen = result.data.hoTen;
+      // user.soDT = result.data.soDt;
+      // setUser(user);
+    } catch (error) {
+      console.log('error',error)
+    }
+  }
+
+
   return (
     <section className='info'>
       <div className='container'>
@@ -70,7 +119,7 @@ export default function Info() {
                     <h6 className="mb-0">Tài khoản</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
-                    {user.data.taiKhoan}
+                    {user.taiKhoan}
                   </div>
                 </div>
                 <hr />
@@ -79,16 +128,16 @@ export default function Info() {
                     <h6 className="mb-0">Email</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
-                    {user.data.email}
+                    {user.email}
                   </div>
                 </div>
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <h6 className="mb-0">Họ Tên</h6>
+                    <h6 className="mb-0">Họ tên</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
-                    {user.data.hoTen}
+                    {user.hoTen}
                   </div>
                 </div>
                 <hr />
@@ -97,7 +146,7 @@ export default function Info() {
                     <h6 className="mb-0">Số điện thoại</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
-                    {user.data.soDT}
+                    {user.soDT}
                   </div>
                 </div>
                 <hr />
@@ -147,49 +196,56 @@ export default function Info() {
                   {/* <div className="card mb-3"> */}
                   <div className="card-body">
                     <div className="row">
-                      <div className="col-sm-4">
+                      <div className="col-sm-5">
                         <h6 className="mb-0">Tài khoản</h6>
                       </div>
-                      <div className="col-sm-8 text-secondary">
-                        {user.data.taiKhoan}
+                      <div className="col-sm-7 text-secondary">
+                        {user.taiKhoan}
                       </div>
                     </div>
                     <hr />
                     <div className="row">
-                      <div className="col-sm-4">
+                      <div className="col-sm-5">
                         <h6 className="mb-0">Email</h6>
                       </div>
-                      <div className="col-sm-8 text-secondary">
-                        {user.data.email}
+                      <div className="col-sm-7 text-secondary">
+                        {user.email}
                       </div>
                     </div>
                     <hr />
                     <div className="row">
-                      <div className="col-sm-4">
-                        <h6 className="mb-0">Họ Tên</h6>
+                      <div className="col-sm-5">
+                        <h6 className="mb-0">Họ tên</h6>
                       </div>
-                      <input className='col-sm-8' type="text" />
+                      <input className='col-sm-7' type="text" value={hoTen} onChange={(event) => setHoTen(event.target.value)} />
                     </div>
                     <hr />
                     <div className="row">
-                      <div className="col-sm-4">
+                      <div className="col-sm-5">
                         <h6 className="mb-0">Số điện thoại</h6>
                       </div>
-                      <input className='col-sm-8' type="text" />
+                      <input className='col-sm-7' type="text" value={soDT} onChange={(event) => setSoDT(event.target.value)} />
                     </div>
                     <hr />
                     <div className="row">
-                      <div className="col-sm-4">
-                        <h6 className="mb-0">Mật khẩu</h6>
+                      <div className="col-sm-5">
+                        <h6 className="mb-0">Mật khẩu mới</h6>
                       </div>
-                      <input className='col-sm-8' type="text" />
+                      <input className='col-sm-7' type="text" value={matKhau} onChange={(event) => setMatKhau(event.target.value)} />
+                    </div>
+                    <hr />
+                    <div className="row">
+                      <div className="col-sm-5">
+                        <h6 className="mb-0">Nhập lại mật khẩu</h6>
+                      </div>
+                      <input className='col-sm-7' type="text" value={nhapLaiMatKhau} onChange={(event) => setNhapLaiMatKhau(event.target.value)} />
                     </div>
                   </div>
                   {/* </div> */}
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                  <button type="button" className="btn btn-primary">Lưu</button>
+                  <button type="button" className="btn btn-primary" onClick={() => capNhatThongTin(hoTen, soDT, matKhau, nhapLaiMatKhau)}>Lưu</button>
                 </div>
               </div>
             </div>

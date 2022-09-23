@@ -84,7 +84,7 @@ export default function RegisterPage(props) {
                   </div>
                   <div className="form-outline">
                     <input type="password" id="nhapLaiMatKhau" className="form-control form-control-lg" placeholder='Nhập lại mật khẩu' onChange={(event) => setNhapLaiMatKhau(event.target.value)} />
-                    <p className="text-danger error" id="error_required_nhapLaiMatKhau error_retype_nhapLaiMatKhau"></p>
+                    <p className="text-danger error" id="error_required_nhapLaiMatKhau"></p>
                     <p className="text-danger error" id="error_retype_nhapLaiMatKhau"></p>
                   </div>
                   <div className="form-outline">
