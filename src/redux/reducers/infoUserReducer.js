@@ -9,11 +9,12 @@ export const infoUserReducer = (state = stateDefault,action) => {
             return {...state};
         }
         case 'CAP_NHAT_THONG_TIN': {
+            console.log('action',action)
             let {hoTen,soDt} = action.data
-            // state = {...state};
-            state.hoTen = hoTen
-            state.soDT = soDt
-            return {...state};
+            let newState = {...state};
+            newState.hoTen = hoTen
+            newState.soDT = soDt
+            return {...newState};
         }
         default: return state;
     }

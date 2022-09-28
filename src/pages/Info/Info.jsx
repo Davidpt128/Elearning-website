@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event'
 import { Button } from 'antd/lib/radio'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
@@ -79,15 +78,15 @@ export default function Info() {
         body
       );
       console.log('result',result.data)
-      alert('Cập nhật thành công')
+      // alert('Cập nhật thành công')
       
       //dispatch
-      const action ={
+      const action = {
         type: 'CAP_NHAP_THONG_TIN',
         data: result.data
       }
       dispatch(action)
-
+      
       // // setUser
       // user.hoTen = result.data.hoTen;
       // user.soDT = result.data.soDt;
