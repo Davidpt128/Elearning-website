@@ -35,7 +35,7 @@
   }
 
 .animation {
-    background: #fcbe3a;
+    background-color: #fcbe3a;
     border: none;
     z-index: 1;
     &:after {
@@ -54,7 +54,7 @@
         transition: all 0.3s ease;
       }
     &:hover {
-        color: #fff;
+        color: #fcbe3a;
       }
     &:hover:after {
         left: 0;

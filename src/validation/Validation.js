@@ -1,10 +1,17 @@
 export function Validation () {
   this.kiemTraRong = function (value,selectorError) {
+    
     if(value.trim() ==='') {
-      document.querySelector(selectorError).innerHTML = 'Không được bỏ trống!';
+      let x = document.querySelector(selectorError)
+      if (x){
+        x.innerHTML = 'Không được bỏ trống!';
+      }
       return false;
     }
-    document.querySelector(selectorError).innerHTML = '';
+    let y = document.querySelector(selectorError)
+    if (y){
+      y.innerHTML = '';
+    }
     return true;
   }
 

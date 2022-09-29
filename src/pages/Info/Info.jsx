@@ -12,9 +12,9 @@ let kiemTra = new Validation();
 
 export default function Info() {
   const [listCourse, setListCourse] = useState([]);
-  // const [user, setUser] = useState(useSelector((rootReducers) => rootReducers.infoUserReducer));
-  let user = useSelector((rootReducers) => rootReducers.infoUserReducer)
-  console.log('user',user)
+  const [user, setUser] = useState(useSelector((rootReducers) => rootReducers.infoUserReducer));
+  // let user = useSelector((rootReducers) => rootReducers.infoUserReducer)
+  // console.log('user',user)
 
   const [hoTen, setHoTen] = useState(user.hoTen)
   const [soDT, setSoDT] = useState(user.soDT)
@@ -77,8 +77,8 @@ export default function Info() {
         "/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
         body
       );
-      console.log('result',result.data)
-      // alert('Cập nhật thành công')
+      // console.log('result',result.data)
+      alert('Cập nhật thành công')
       
       //dispatch
       const action = {
